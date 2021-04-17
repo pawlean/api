@@ -18,6 +18,11 @@
 
 An API to manage our community data
 
+## Prerequisite
+
+- docker
+- node
+
 ## Rules
 
 - Commits follow the standard [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
@@ -31,16 +36,8 @@ $ npm install
 
 ## Running the app locally
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
+1. `docker-compose up` (this will run stargate and cassandra DB locally)
+2. `npm run start:dev` (this will watch for changes)
 
 ## Swagger docs
 
@@ -49,7 +46,7 @@ $ npm run start:prod
 
 Official docs at https://docs.nestjs.com/openapi/introduction
 
-## Test
+## Tests
 
 ```bash
 # unit tests
