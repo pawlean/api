@@ -10,3 +10,7 @@ export interface StandupAuthor extends Author {
   platform: string;
   uid: string;
 }
+
+export interface StandupConfig {
+  useStandup: boolean;
+}

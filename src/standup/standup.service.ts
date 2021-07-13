@@ -1,18 +1,21 @@
 import { AstraService, deleteItem } from '@cahllagerfeld/nestjs-astra';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { StandupDTO } from './dto/standup.dto';
-import { Standup } from './interfaces/standup.interface';
+import { Standup, StandupConfig } from './interfaces/standup.interface';
 import { catchError, concatMap, filter } from 'rxjs/operators';
 import { Author } from '../auth/author-headers';
 import { ValidationService } from '../auth/header-validation.service';
 import { from } from 'rxjs';
+import { BaseService } from '../commons/base.service';
 
 @Injectable()
-export class StandupService {
+export class StandupService extends BaseService {
   constructor(
-    private readonly astraService: AstraService,
+    readonly astraService: AstraService,
     private readonly validationService: ValidationService,
-  ) {}
+  ) {
+    super(astraService);
+  }
 
   create(body: StandupDTO) {
     const { author, todayMessage, yesterdayMessage } = body;

@@ -12,18 +12,27 @@ import {
 import { ApiHeader, ApiQuery, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { Author, AuthorObject } from '../auth/author-headers';
 import { TokenGuard } from '../auth/token.strategy';
+import { BaseController } from '../commons/base.controller';
 import { StandupDTO } from './dto/standup.dto';
 import { StandupService } from './standup.service';
-
 @ApiTags('Standup')
 @Controller('standup')
-export class StandupController {
-  constructor(private readonly standupService: StandupService) {}
+export class StandupController extends BaseController {
+  constructor(private readonly standupService: StandupService) {
+    super(standupService);
+  }
+
+  updateConfig<T>(body: T) {
+    throw new Error('Method not implemented.');
+  }
+  async getConfig() {
+    return await this.standupService.createConfig({ Baui: 'test' });
+  }
 
   @Post()
   @UseGuards(TokenGuard)
   @ApiSecurity('token')
-  createStandup(@Body() body: StandupDTO) {
+  async createStandup(@Body() body: StandupDTO) {
     return this.standupService.create(body);
   }
 
